@@ -47,7 +47,7 @@ pip install -r requirements.txt
 uvicorn moi.main:app --reload
 ```
 
-> Then Visit http://127.0.0.1:8000/docs for interactive API documentation.
+> Visit http://127.0.0.1:8000/docs for interactive API documentation.
 
 ### Testing
 Run unit and integration tests with:
