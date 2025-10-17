@@ -6,9 +6,8 @@ from httpx import (
     AsyncClient,
     ASGITransport,
 ) 
-os.environ["ENV_STATE"] = "test" # TODO: Implement .env setup (#4)
+os.environ["ENV_STATE"] = "test" 
 
-# TODO: Implement database setup (#3)
 from core.database import database #noqa: E402 
 
 # TODO: Implement main logic (#2)
