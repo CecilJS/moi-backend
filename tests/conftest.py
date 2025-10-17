@@ -9,7 +9,7 @@ from httpx import (
 os.environ["ENV_STATE"] = "test" # TODO: Implement .env setup (#4)
 
 # TODO: Implement database setup (#3)
-from database import database #noqa: E402 
+from core.database import database #noqa: E402 
 
 # TODO: Implement main logic (#2)
 from main import app  # noqa: E402 

@@ -1,5 +1,5 @@
-black==24.3.1
-ruff==0.0.325
-pytest==8.3.2
+black
+ruff
+pytest
 pre-commit
 httpx
