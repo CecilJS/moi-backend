@@ -72,7 +72,7 @@ Run unit and integration tests with:
 moi/
 ├─ auth/                # Azure B2C integration: token validation, role checks
 ├─ main.py              # Application entrypoint
-├─ api/                 # API routes (users, posts, comments)
+├─ routes/                 # API routes (users, posts, comments)
 ├─ core/                # Core configurations
 ├─ models/              # Database models (Post, Comment)
 ├─ schemas/             # Pydantic schemas
