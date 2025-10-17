@@ -10,7 +10,6 @@ os.environ["ENV_STATE"] = "test"
 
 from core.database import database #noqa: E402 
 
-# TODO: Implement main logic (#2)
 from main import app  # noqa: E402 
 
 
