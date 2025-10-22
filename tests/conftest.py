@@ -26,8 +26,12 @@ def client() -> Generator:
 @pytest.fixture(autouse=True)
 async def db() -> AsyncGenerator:
     await database.connect()
-    yield
-    await database.disconnect()
+    transaction = await database.transaction()
+    try:
+        yield
+    finally:
+        await transaction.rollback()
+        await database.disconnect()
 
 @pytest.fixture()
 async def async_client(client) -> AsyncGenerator:
