@@ -5,7 +5,7 @@ from core.config import config
 
 metadata = sqlalchemy.MetaData()
 
-comment_table = sqlalchemy.Table(
+post_table = sqlalchemy.Table(
     "posts",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
