@@ -1,6 +1,6 @@
-fastapi==0.95.0
-uvicorn[standard]==0.22.0
-pydantic==2.1.1
+fastapi
+uvicorn[standard]
+pydantic
 sqlalchemy
 databases[aiosqlite]
 python-dotenv

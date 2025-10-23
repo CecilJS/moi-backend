@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from core.database import database
 from api.healthcheck import router as healthcheck_router
+from api.posts.posts import router as posts_router
 
 
 @asynccontextmanager
@@ -14,3 +15,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(healthcheck_router)
+app.include_router(posts_router)
