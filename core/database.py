@@ -1,31 +1,16 @@
-import databases
-import sqlalchemy
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from core.config import config
+from sqlalchemy.orm import DeclarativeBase
 
+class Base(DeclarativeBase):
+    pass
 
-metadata = sqlalchemy.MetaData()
+engine = create_async_engine(config.DATABASE_URL, echo=True)
 
-post_table = sqlalchemy.Table(
-    "posts",
-    metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("body", sqlalchemy.String),
+async_session_factory = async_sessionmaker(
+    engine, expire_on_commit=False, class_=AsyncSession
 )
 
-comment_table = sqlalchemy.Table(
-    "comments",
-    metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("body", sqlalchemy.String),
-    sqlalchemy.Column("post_id", sqlalchemy.ForeignKey("posts.id"), nullable=False),
-)
-
-engine = sqlalchemy.create_engine(
-    config.DATABASE_URL, connect_args={"check_same_thread": False}
-)
-
-metadata.create_all(engine)
-
-database = databases.Database(
-    config.DATABASE_URL, force_rollback=config.DB_FORCE_ROLL_BACK
-)
+async def init_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)

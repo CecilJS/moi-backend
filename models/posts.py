@@ -1,9 +1,11 @@
-from pydantic import BaseModel
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from typing import List
+from core.database import Base
 
+class Post(Base):
+    __tablename__ = "posts"
 
-class UserPostIn(BaseModel):
-    body: str
+    id: Mapped[int] = mapped_column(primary_key=True)
+    body: Mapped[str] = mapped_column()
 
-
-class UserPost(UserPostIn):
-    id: int
+    comments: Mapped[List["Comment"]] = relationship(back_populates="post")

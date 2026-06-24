@@ -1,18 +1,16 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from core.database import database
-from api.healthcheck import router as healthcheck_router
-from api.posts.posts import router as posts_router
-
+from core.database import engine
+from api.router import api_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await database.connect()
     yield
-    await database.disconnect()
+    await engine.dispose()
 
+def create_application():
+    application = FastAPI(lifespan=lifespan)
+    application.include_router(api_router)
+    return application
 
-app = FastAPI(lifespan=lifespan)
-
-app.include_router(healthcheck_router)
-app.include_router(posts_router)
+app = create_application()
